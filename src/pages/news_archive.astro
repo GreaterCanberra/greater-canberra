@@ -1,0 +1,33 @@
+---
+    import MainLayout from '../layouts/MainLayout.astro';
+    import BigCard from '../components/BigCard.astro'
+    import MailChimp from '../components/mailchimp.astro'
+
+    import { Markdown } from 'astro/components';
+    import {format, parseISO} from 'date-fns';
+    let allPosts = await Astro.fetchContent('../pages/blog/*.md');
+    allPosts = allPosts.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+    allPosts = allPosts.reverse();
+---
+
+<MainLayout title="News" description="Greater Canberra is a community advocacy group committed to affordable and high-quality housing in Canberra.">
+
+<section id="news-archive">
+<div class="all-post-feed">
+  <h2 class="underline orange">News Archive</h2>
+        {allPosts.map((post) => (
+    <a class="wrapper-link" href={post.url}>
+    <BigCard>
+      <img class="aside" src={post.thumbnail} alt="">
+      <div class="feed-text">
+      <h3>{post.title}</h3>
+      <p class="article-date">{format(parseISO(post.date), 'MMMM d, yyyy, H:mm')}</p>
+      <p>{post.description}</p>
+      </div>
+    </BigCard>
+    </a>
+  ))}
+</div>
+</section>
+
+</MainLayout>
