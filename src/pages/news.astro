@@ -3,12 +3,9 @@
     import BigCard from '../components/BigCard.astro'
     import MailChimp from '../components/mailchimp.astro'
 
-      
-
     import { Markdown } from 'astro/components';
     import {format, parseISO} from 'date-fns';
-    
-    // const data = Astro.fetchContent('../pages/blog/*.md'); // returns an array of posts that live at ./src/pages/post/*.md
+
     let allPosts = await Astro.fetchContent('../pages/blog/*.md');
     allPosts = allPosts.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
     allPosts = allPosts.reverse();
