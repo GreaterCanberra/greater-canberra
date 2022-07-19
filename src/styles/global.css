@@ -787,3 +787,8 @@ article.secondary img {
 .all-post-feed .feed-text {
   margin-left: 30px;
 }
+
+.article-date {
+  color: grey;
+  font-size: 1.0rem;
+}

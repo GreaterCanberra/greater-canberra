@@ -6,6 +6,8 @@
       
 
     import { Markdown } from 'astro/components';
+    import {format, parseISO} from 'date-fns';
+    
     // const data = Astro.fetchContent('../pages/blog/*.md'); // returns an array of posts that live at ./src/pages/post/*.md
     let allPosts = await Astro.fetchContent('../pages/blog/*.md');
     allPosts = allPosts.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
@@ -20,6 +22,7 @@
     <article>
       <img class="aside" src={featured.thumbnail} alt="">
       <h2>{featured.title}</h2>
+      <p class="article-date">{format(parseISO(featured.date), 'MMMM d, yyyy, H:mm')}</p>
       <p class="featured-content-container"><div class="featured-content">{featured.astro.html}</div></p>
       <a class="primary-link right" href={featured.url}>Read more</a>
     </article>
@@ -38,6 +41,8 @@
     <article class="secondary">
       <img src={post.thumbnail} alt="">
       <h3>{post.title}</h3>
+      <p class="article-date">{format(parseISO(post.date), 'MMMM d, yyyy, H:mm')}</p>
+      <p>{post.description}</p>
     </article>
     </a>
   ))}
@@ -53,6 +58,7 @@
       <img class="aside" src={post.thumbnail} alt="">
       <div class="feed-text">
       <h3>{post.title}</h3>
+      <p class="article-date">{format(parseISO(post.date), 'MMMM d, yyyy, H:mm')}</p>
       <p>{post.description}</p>
       </div>
     </BigCard>
@@ -76,6 +82,7 @@
       <img src={post.thumbnail} alt="">
       <div class="feed-text">
       <h3>{post.title}</h3>
+      <p class="article-date">{format(parseISO(post.date), 'MMMM d, yyyy, H:mm')}</p>
       <p>{post.description}</p>
       </div>
     </article>
